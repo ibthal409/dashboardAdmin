@@ -19,13 +19,13 @@ const blogSchema = new mongoose.Schema({
   category: {
     type: String,
     enum: ["Fruits and Vegetables", "Protien", "Starchy Food", "All"],
-    // required: true,
+    // required: true 
   },
 
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
-    required: true
+    // required: true
   }
 },
 

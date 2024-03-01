@@ -2,6 +2,8 @@ const multer = require("multer");
 
 const uploadOneImage = () => {
 
+  console.log("ok multer");
+
   const storage = multer.memoryStorage(
     //   {
     //   destination: function (req, file, cb) {
