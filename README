@@ -1,0 +1,73 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// in authcontroller
+1- signUp
+use an email , password,passwordConfirm
+(signToken) for generate a token 
+make a role user
+
+post(http://localhost:8000/user/singUp)
+
+2-login 
+use an email and password
+(signToken) for generate a token 
+post(http://localhost:8000/user/login)
+
+//////////////////////////////////////////////////////
+//in userController(for admin only)
+1- Adduser
+send token first
+enter(name,email,password,active,role)
+post(http://localhost:8000/user)
+
+2-getusers
+send token first
+get(http://localhost:8000/user)
+
+3-updateUser
+send token first
+Patch(http://localhost:8000/user/{id})
+enter the data want Change
+
+4-getUserByID
+send token first
+get(http://localhost:8000/user/{id})
+
+5-deleteUser
+send token
+delete(http://localhost:8000/user/{id})
+
+
+///autMiddleWare
+
+restrictTo(for check role)
+protect(not route if no token)
+
+
+
+
+/////////////////////////////////////////////////
+
+////in blogController
+1- AddBlog
+send token first
+enter(title,description,category,image)
+post(http://localhost:8000/blogs)
+
+2-getBlogs (for admin only)
+send token first
+get(http://localhost:8000/blogs/)
+if want filter(http://localhost:8000/blogs/?filter={categories})
+
+3-getBlogByID(for admin only)
+send token first
+get(http://localhost:8000/blogs/{id})
+
+4-updateBlog(for admin only)
+send token first
+Patch(http://localhost:8000/blogs/{id})
+enter the data want Change
+
+
+5-deleteBlog(for admin only)
+send token
+delete(http://localhost:8000/blogs/{id})

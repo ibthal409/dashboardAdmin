@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "65c7888d779d2452734ce0d2",
+    "name": "Ahmed Ali",
+    "role": "admin",
+    "email": "admin@natours.io",
+    "password": "4444444444444444444400",
+    "active": true
+  },
+
+  {
+    "_id": "65c789081f9b61c8f385261b",
+    "name": "ibthal mohammed",
+    "role": "user",
+    "email": "ibthal@example.com",
+    "password": "04r433333rer2333333333333333434e9",
+    "active": true
+  },
+
+  {
+    "_id": "65c789753bbb10f2e36512f2",
+    "name": "Ahmed Gebreel",
+    "role": "admin",
+    "email": "gebreel@example.com",
+    "password": "343wsdcdsferfdxcxxdfr",
+    "active": true
+  },
+  {
+    "_id": "65c789b53bbb10f2e36512f6",
+    "name": "Basma sameh",
+    "role": "user",
+    "email": "basma@example.com",
+    "password": "wdsxzcvfgbtrreew",
+    "active": false
+  },
+  {
+    "_id": "65c789903bbb10f2e36512f4",
+    "name": "Doaa mohammed",
+    "role": "user",
+    "email": "doaa@example.com",
+    "password": "343wsdcdsferfdxcxxdfr",
+    "active": true
+  },
+  {
+    "_id": "65c789573bbb10f2e36512f0",
+    "name": "Eman Elsayed",
+    "role": "admin",
+    "email": "eman@example.com",
+    "password": "755554erdfvxcxc",
+    "active": true
+  }
+]
