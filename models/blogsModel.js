@@ -16,6 +16,8 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  imageUrl: String,
+
   category: {
     type: String,
     enum: ["Fruits and Vegetables", "Protien", "Starchy Food", "All"],

@@ -1,6 +1,7 @@
 const blog = require("../models/blogsModel");
 const sharp = require('sharp');
 const { uploadOneImage } = require("../middleware/uploadImageMiddleware");
+const cloud = require("../utils/cloud");
 
 const categories = ["Fruits and Vegetables", "Protien", "Starchy Food"];
 
@@ -60,38 +61,48 @@ class APIFeatures {
 }
 
 const uploadBlogImage = uploadOneImage()
-const resizeBlogPhoto = async (req, res, next) => {
-  
-  if (!req.file) return next();
+// const resizeBlogPhoto = async (req, res, next) => {
 
-  const filename = `blog-${Date.now()}.jpeg`;
+//   if (!req.file) return next();
 
-  await sharp(req.file.buffer)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/images/${filename}`);
-  //saveImage as string
-  req.body.image = filename
-  //saveImage as url
-  // req.body.image = req.hostname+filename
+//   const filename = `blog-${Date.now()}.jpeg`;
 
-  next();
-};
+//   await sharp(req.file.buffer)
+//     .toFormat('jpeg')
+//     .jpeg({ quality: 90 })
+//     .toFile(`public/images/${filename}`);
+//   //saveImage as string
+//   req.body.image = filename
+//   //saveImage as url
+//   // req.body.image = req.hostname+filename
+
+//   next();
+// };
 
 async function addBlog(req, res, next) {
   if (!req.body.user) req.body.user = req.user.id;
   const { title, description, imageUrl, category, user, image } = req.body;
-  console.log(req.body.image);
+  // console.log(req.body.image);
+  console.log(req.file);
   try {
+    if (req.file) {
+
+      const result = await cloud.uploads(req.file.path);
+      console.log(result);
+      var imgD = {
+        // image: req.files[0].filename,
+        imageUrl: result.url,
+      };
+    }
     const newBlog = new blog({
       title,
       description,
-      imageUrl,
+      imageUrl: imgD.imageUrl,
       category, user, image
     });
 
     const savednewBlog = await newBlog.save();
-    res.status(201).json("blog added successfully");
+    res.status(201).json({ message: "blog added successfully", savednewBlog });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -101,7 +112,7 @@ async function getBlogs(req, res, next) {
   try {
     const features = new APIFeatures(blog.find(), req.query).filter()
       .sort();
-      // .paginate();
+    // .paginate();
     // console.log(req.query);
     const blogs = await features.query;
     // const blogs = await blog.find();
@@ -160,5 +171,5 @@ module.exports = {
   addBlog,
   updateBlog,
   getBlogByID,
-  deleteBlog, uploadBlogImage, resizeBlogPhoto
+  deleteBlog, uploadBlogImage
 };

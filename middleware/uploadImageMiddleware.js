@@ -1,35 +1,31 @@
 const multer = require("multer");
 
 const uploadOneImage = () => {
+  //   console.log("ok multer");
 
-  console.log("ok multer");
+  const storage = multer.diskStorage({
+    destination: "public/images",
+    filename: (req, file, cb) => {
+      newName = `blog-${Date.now()}.jpeg`
+      cb(null, newName);
+    },
+  });
 
-  const storage = multer.memoryStorage(
-    //   {
-    //   destination: function (req, file, cb) {
-    //     cb(null, "uploads/user");
-    //   }, filename: function (req, file, cb) {
-    //     const extention = file.mimetype.split("/")[1];
-    //     newName = `user-${Date.now()}.${extention}`
-    //     cb(null, newName);
-    //   },
-
-    // }
-  );
-  const fileFilter = function (req, file, cb) {
-    if (file.mimetype.startsWith("image")) {
-      cb(null, true)
+  const fileFilter = (req, file, cb) => {
+    if (
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg"
+    ) {
+      cb(null, true);
     } else {
-      cb(res.status(400).json({ message: 'image allowed' }), false)
+      cb(null, false);
     }
-  }
-
+  };
   const upload = multer({ storage, fileFilter });
   return upload.single("image")
+  // return upload
 }
-
-
-
 
 module.exports = {
   uploadOneImage
